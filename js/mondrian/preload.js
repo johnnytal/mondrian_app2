@@ -24,9 +24,7 @@ preloader.prototype = {
        startGUI();
        
        initAd();
-       
-       alert("Generate Mondrian paintings - \ntap the screen to create a new painting\nUse the controls to change shapes' size and colors");
-        
+
        game.state.start("Game");
     },
 };

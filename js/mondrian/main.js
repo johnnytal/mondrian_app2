@@ -21,10 +21,26 @@ game_main.prototype = {
 			if(AdMob) AdMob.showInterstitial();
 	  	}
 	  	
+	  	if (!started){
+	    	instructText = game.add.text(578, 680, '', {
+	        	font: '42px', fill: 'white', align: 'center', stroke:'black', strokeThickness: 1
+	   		});
+	
+	    	instructText.text = "Generate Mondrian paintings - \nTap the screen to create a new painting.\nUse the controls to change shapes' size and color";
+	    	
+	   		instructText.x = game.world.centerX - instructText.width / 2;
+	   		instructText.y = game.world.centerY - instructText.height / 2 - 200;
+	   		
+	   		started = true;
+   		}
     },
     update: function(){
     	if (game.input.activePointer.isDown){
     		game.state.start("Game"); 
+    		
+    		if (instructText.visible){
+    			instructText.destroy();
+    		}
     	}
     }
 };
@@ -106,7 +122,7 @@ function shuffle(a) {
     return a;
 }
 
-function initAd(){
+function initAd(){		
 	admobid = {
       banner: 'ca-app-pub-9795366520625065/6484168320',
       interstitial: 'ca-app-pub-9795366520625065/4376879737'

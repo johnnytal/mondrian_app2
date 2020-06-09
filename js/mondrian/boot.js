@@ -8,6 +8,8 @@ function start(){
     WIDTH = 960; 
     HEIGHT = 960;
     
+    started = false;
+    
     w = window.innerWidth * window.devicePixelRatio;
     h = window.innerHeight * window.devicePixelRatio;
 
