@@ -23,7 +23,7 @@ preloader.prototype = {
        
        startGUI();
        
-       //initAd();
+       initAd();
         
        game.state.start("Game");
     },
