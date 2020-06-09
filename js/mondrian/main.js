@@ -5,14 +5,6 @@ var game_main = function(game){
 	colors = [0xffffff, 0x20100, getGrey(), getGrey(), 0x324E8D, 0xD01619, 
 	0xFCE317, 0x0E7CB8, 0xD43E29, 0xAECC34, 0x0016AD, 0x0A9145];
 
-    notes_penta = [ 
-        'C2','D2','F2','G2','A2',
-        'C3','D3','F3','G3','A3',
-        'C4','D4','F4','G4','A4',
-        'C5','D5','F5','G5','A5',
-        'C6','D6','F6','G6','A6'
-    ];
-    
     config = {
 	    SHAPE_SIZE: 360,
 	    COLORS: 6
@@ -23,6 +15,12 @@ game_main.prototype = {
     create: function(){
     	shuffle(colors);
 		createNew(); 
+   	 	
+   	 	var rnd = game.rnd.integerInRange(0, 15);
+   	 	if (rnd == 2){ 	 	 	
+			if(AdMob) AdMob.showInterstitial();
+	  	}
+	  	
     },
     update: function(){
     	if (game.input.activePointer.isDown){
@@ -37,8 +35,6 @@ function createNew(){
    
    frameGraphics.drawRect(0, 0,  WIDTH, HEIGHT);
    
-   osc = T("cosc", {wave:'tri', mul:0.2}); 
-
    graphics = game.add.graphics(0, 0);
 	 
    graphics.lineStyle(game.rnd.integerInRange(1, 10), getGrey(), 1);
@@ -58,9 +54,6 @@ function createNew(){
 }
 
 function draw(randomW, randomH, randomColor, startX, startY, _colorIndex){
-    var frequency = notes_penta[game.rnd.integerInRange(0, notes_penta.length-1)];
-    osc.freq = teoria.note(frequency).fq();
-    
 	graphics.beginFill(getRndColor());
 	rect = graphics.drawRect(startX, startY,  randomW, randomH);
 	graphics.endFill();
@@ -86,16 +79,7 @@ function draw(randomW, randomH, randomColor, startX, startY, _colorIndex){
 				totalWidth = 0;
 			}
 		}
-	    
-	    var attack = game.rnd.integerInRange(0, 30);
-	    var sustain = game.rnd.integerInRange(50, 140);
-	    var decay = game.rnd.integerInRange(50, 120);
-	    var release = game.rnd.integerInRange(50, 120);
-	    
-	    env = T("perc", {a: attack, s:sustain, d:sustain, r:release}, osc).on("ended", function() {
-	        this.pause();
-	    }).bang().play();  
-	}, 70);	
+	}, 70);
 }
 
 function getGrey(){
