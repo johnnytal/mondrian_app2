@@ -17,9 +17,6 @@ preloader.prototype = {
 	   try{
            StatusBar.hide;
        } catch(e){} 
-       try{
-           window.plugins.insomnia.keepAwake();
-       } catch(e){}  
        
        startGUI();
        
@@ -35,8 +32,9 @@ preloader.prototype.fileComplete = function (progress, cacheKey, success, totalL
 
 function startGUI () {
     var gui = new dat.GUI({ width: 300 });
-    gui.add(config, 'COLORS', 2, 12).name('COLORS').step(1);
-    gui.add(config, 'SHAPE_SIZE', 256, 768).name('SHAPE_SIZE').step(1);
+    gui.add(config, 'COLORS', 2, 12).name('Colors').step(1);
+    gui.add(config, 'SHAPE_SIZE', 256, 768).name('Shape Size').step(1);
+    gui.add(config, 'LINE_WIDTH', 1, 7).name('Line width').step(1);
 
     if (isMobile()) gui.close();
 }

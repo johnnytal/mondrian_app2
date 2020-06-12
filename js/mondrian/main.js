@@ -7,7 +7,8 @@ var game_main = function(game){
 
     config = {
 	    SHAPE_SIZE: 360,
-	    COLORS: 6
+	    COLORS: 6, 
+	    LINE_WIDTH: 3
 	};
 };
 
@@ -23,10 +24,12 @@ game_main.prototype = {
 	  	
 	  	if (!started){
 	    	instructText = game.add.text(578, 680, '', {
-	        	font: '42px', fill: 'white', align: 'center', stroke:'black', strokeThickness: 1
+	        	font: '42px', fill: 'white', align: 'center', stroke:'black', strokeThickness: 1, backgroundColor: 'rgba(0,0,139,0.8)'
 	   		});
 	
-	    	instructText.text = "Generate Mondrian paintings - \nTap the screen to create a new painting.\nUse the controls to change shapes' size and color";
+	    	instructText.text = "Generate Mondrian paintings - \n- Tap the screen to create a new painting." +
+	    	"\n- Use the controls to change shapes' size & color\n" +
+	    	"- For interesting results try tapping multiple times\nwhile the image compiles";
 	    	
 	   		instructText.x = game.world.centerX - instructText.width / 2;
 	   		instructText.y = game.world.centerY - instructText.height / 2 - 200;
@@ -53,7 +56,7 @@ function createNew(){
    
    graphics = game.add.graphics(0, 0);
 	 
-   graphics.lineStyle(game.rnd.integerInRange(1, 10), getGrey(), 1);
+   graphics.lineStyle(game.rnd.integerInRange(1 * config.LINE_WIDTH, 5 * config.LINE_WIDTH), getGrey(), 1);
 
    game.stage.backgroundColor = getRndColor();
 	
